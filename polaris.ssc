@@ -33,7 +33,7 @@ ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
 //ConstellationMgr.setFlagLabels(true);
 ConstellationMgr.setFlagBoundaries(false);
 
-var wait = 10;   // Number of seconds to wait between camera changes, multiplied by camera.wait
+var wait = 60;   // Number of seconds to wait between camera changes, multiplied by camera.wait
 var zoomSec = 0; // Duration of zooms (0 for instant)
 var round = 1;
 var i = 0;
