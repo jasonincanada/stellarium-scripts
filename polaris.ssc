@@ -1,0 +1,62 @@
+// Name:   Polaris
+// Author: Jason Hooper
+// Date:   28 September 2017
+// About:  A slow tour around the solar system up to Saturn. Cameras on moons point to an inner moon.
+
+var cameras = [
+    { name: "Sun",     from: "Earth",  fov: 40   , wait: 3 },
+    { name: "Moon",    from: "Earth",  fov: 1    , wait: .5, z: 1, spinWait: 2, boundaries: true },
+    { name: "Mars",    from: "Earth",  fov:   .01, wait: 3 },
+    { name: "Phobos",  from: "Deimos", fov: 40   , wait: 5 },
+    { name: "Jupiter", from: "Earth",  fov:   .1 , wait: 3 },
+    { name: "Io",      from: "Europa", fov: 40   , wait: 5 },
+    { name: "Saturn",  from: "Earth",  fov:   .05, wait: 3 },
+    { name: "Mimas",   from: "Rhea",   fov: 40   , wait: 5 },
+];
+
+// Set various display attributes
+core.            setRealTime();
+core.            setGuiVisible(false);
+core.            setMaxFps(10);
+LandscapeMgr.    setFlagAtmosphere(false);
+LandscapeMgr.    setFlagLandscape(false);
+LandscapeMgr.    setFlagFog(false);
+LandscapeMgr.    setFlagCardinalsPoints(false);
+SolarSystem.     setFlagLabels(true);
+StarMgr.         setLabelsAmount(0);
+StelMovementMgr. setEquatorialMount(true);
+GridLinesMgr.    setFlagEclipticLine(true);
+GridLinesMgr.    setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
+ConstellationMgr.setLinesColor (Vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
+//ConstellationMgr.setFlagLines(true);
+//ConstellationMgr.setFlagLabels(true);
+ConstellationMgr.setFlagBoundaries(false);
+
+var wait = 10;   // Number of seconds to wait between camera changes, multiplied by camera.wait
+var zoomSec = 0; // Duration of zooms (0 for instant)
+var round = 1;
+var i = 0;
+
+while(true) {
+  var camera = cameras[i];
+
+  core.setObserverLocation(0, 0, 100, 0, "", camera.from);
+  core.selectObjectByName(camera.name, false);
+  StelMovementMgr.setFlagTracking(true);
+  //ConstellationMgr.setFlagBoundaries(camera.boundaries || false);
+  core.wait(camera.spinWait || 0);
+
+  StelMovementMgr.zoomTo(camera.fov, camera.z || zoomSec);
+  core.wait(zoomSec);
+  core.selectObjectByName("", false);
+  core.wait(camera.wait * wait);
+
+  if (++i == cameras.length) {
+    round++;
+    i = 0;
+
+    // Show planet/moon labels every few rounds
+    SolarSystem.setFlagLabels(round % 5 == 1);
+  }
+}
