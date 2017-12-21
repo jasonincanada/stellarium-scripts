@@ -1,0 +1,25 @@
+// Name:   Constellations
+// Author: Jason Hooper
+// Date:   7 October 2017
+// About:  Best settings for viewing the constellations
+
+core.            setRealTime();
+LandscapeMgr.    setFlagAtmosphere(false);
+LandscapeMgr.    setFlagLandscape(false);
+SolarSystem.     setFlagLabels(true);
+StarMgr.         setLabelsAmount(0);
+StelMovementMgr .setEquatorialMount(true);
+ConstellationMgr.setLinesColor (Vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setFlagLines  (true);
+ConstellationMgr.setFlagLabels (true);
+ConstellationMgr.setFlagBoundaries(true);
+GridLinesMgr    .setFlagEclipticLine(true)
+GridLinesMgr    .setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
+
+core.setObserverLocation(0, 0, 100, 0, "", "Earth");
+core.selectObjectByName("Leo", false);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(40, 3);
+core.wait(1);
+core.selectObjectByName("", false);
