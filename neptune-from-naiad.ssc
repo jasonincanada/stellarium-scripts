@@ -7,6 +7,7 @@ core.           setRealTime();
 core.           setGuiVisible(false);
 LandscapeMgr.   setFlagAtmosphere(false);
 LandscapeMgr.   setFlagLandscape(false);
+LandscapeMgr.   setFlagCardinalsPoints(false);
 SolarSystem.    setFlagLabels(true);
 StarMgr.        setLabelsAmount(0);
 StelMovementMgr.setEquatorialMount(true);
