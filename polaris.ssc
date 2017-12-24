@@ -5,7 +5,7 @@
 
 var cameras = [
     { name: "Sun",     from: "Earth",  fov: 40   , wait: 2 },
-    { name: "Moon",    from: "Earth",  fov: 1    , wait: 1, z: 1, spinWait: 2, boundaries: true },
+    { name: "Moon",    from: "Earth",  fov: 1    , wait: 1, z: 1, spinWait: 2 },
     { name: "Mars",    from: "Earth",  fov:   .01, wait: 3 },
     { name: "Phobos",  from: "Deimos", fov: 40   , wait: 5 },
     { name: "Jupiter", from: "Earth",  fov:   .1 , wait: 3 },
@@ -44,7 +44,6 @@ while(true) {
   core.setObserverLocation(0, 0, 100, 0, "", camera.from);
   core.selectObjectByName(camera.name, false);
   StelMovementMgr.setFlagTracking(true);
-  //ConstellationMgr.setFlagBoundaries(camera.boundaries || false);
   core.wait(camera.spinWait || 0);
 
   StelMovementMgr.zoomTo(camera.fov, camera.z || zoomSec);
