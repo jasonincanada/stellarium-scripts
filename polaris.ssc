@@ -47,8 +47,7 @@ while(true) {
   core.wait(camera.spinWait || 0);
 
   StelMovementMgr.zoomTo(camera.fov, camera.z || zoomSec);
-  core.wait(zoomSec);
-  core.selectObjectByName("", false);
+  core.wait(camera.z || zoomSec);
   core.wait(camera.wait * wait);
 
   if (++i == cameras.length) {
