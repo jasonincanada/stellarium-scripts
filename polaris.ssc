@@ -37,7 +37,8 @@ var i = 0;
 while(true) {
   var camera = cameras[i];
 
-  core.setObserverLocation(0, 0, 100, 0, "", camera.from);
+  // Toronto latitude/longitude
+  core.setObserverLocation(43.65, 79.38, 100, 0, "", camera.from);
 
   // Newer versions of Stellarium keep different landscape states for each planet/moon so we have to hide it for each
   hideLandscape();
