@@ -19,6 +19,7 @@ core.            setRealTime();
 core.            setGuiVisible(false);
 core.            setMaxFps(10);
 SolarSystem.     setFlagLabels(true);
+SolarSystem.     setLabelsAmount(1);
 StarMgr.         setLabelsAmount(0);
 StelMovementMgr. setEquatorialMount(true);
 GridLinesMgr.    setFlagEclipticLine(true);
