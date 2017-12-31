@@ -18,10 +18,6 @@ var cameras = [
 core.            setRealTime();
 core.            setGuiVisible(false);
 core.            setMaxFps(10);
-LandscapeMgr.    setFlagAtmosphere(false);
-LandscapeMgr.    setFlagLandscape(false);
-LandscapeMgr.    setFlagFog(false);
-LandscapeMgr.    setFlagCardinalsPoints(false);
 SolarSystem.     setFlagLabels(true);
 StarMgr.         setLabelsAmount(0);
 StelMovementMgr. setEquatorialMount(true);
@@ -42,6 +38,10 @@ while(true) {
   var camera = cameras[i];
 
   core.setObserverLocation(0, 0, 100, 0, "", camera.from);
+
+  // Newer versions of Stellarium keep different landscape states for each planet/moon so we have to hide it for each
+  hideLandscape();
+
   core.selectObjectByName(camera.name, false);
   StelMovementMgr.setFlagTracking(true);
   core.wait(camera.spinWait || 0);
@@ -57,4 +57,11 @@ while(true) {
     // Show planet/moon labels every few rounds
     SolarSystem.setFlagLabels(round % 5 == 1);
   }
+}
+
+function hideLandscape() {
+  LandscapeMgr.setFlagAtmosphere(false);
+  LandscapeMgr.setFlagLandscape(false);
+  LandscapeMgr.setFlagFog(false);
+  LandscapeMgr.setFlagCardinalsPoints(false);
 }
