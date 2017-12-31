@@ -5,13 +5,13 @@
 
 core.           setRealTime();
 core.           setGuiVisible(false);
-LandscapeMgr.   setFlagAtmosphere(false);
-LandscapeMgr.   setFlagLandscape(false);
 SolarSystem.    setFlagLabels(false);
 StarMgr.        setLabelsAmount(0);
 StelMovementMgr.setEquatorialMount(true);
 
 core.setObserverLocation(0, 0, 100, 0, "", "Mars");
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagLandscape(false);
 core.selectObjectByName("Moon", false);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(0.001, 0);

@@ -4,8 +4,6 @@
 // About:  Best settings for viewing the constellations
 
 core.            setRealTime();
-LandscapeMgr.    setFlagAtmosphere(false);
-LandscapeMgr.    setFlagLandscape(false);
 SolarSystem.     setFlagLabels(true);
 StarMgr.         setLabelsAmount(0);
 StelMovementMgr .setEquatorialMount(true);
@@ -18,6 +16,8 @@ GridLinesMgr    .setFlagEclipticLine(true)
 GridLinesMgr    .setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
 
 core.setObserverLocation(0, 0, 100, 0, "", "Earth");
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagLandscape(false);
 core.selectObjectByName("Leo", false);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(40, 3);
