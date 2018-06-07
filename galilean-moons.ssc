@@ -1,0 +1,70 @@
+// Name:   Galilean Moons
+// Author: Jason Hooper
+// Date:   26 May 2018
+//
+// About:  Cycle around the Galilean moons: Io, Europa, Ganymede, Callisto.  The cameras cycle from
+//         inner to outer moons, pointing inward to the nearest moon.  Io is the innermost of the
+//         four Galilean moons and points to Amalthea.  It could just as well be pointed at Jupiter
+//         itself, but it's a bit more dynamic when pointing at Amalthea.
+//
+//         There is a 5-second wait before starting the cycle. Newer versions of Stellarium (I've
+//         tested this script on 0.18.0) seem to error out if the camera movements start right when
+//         the script does, so the delay gives the program a few seconds to "settle" before moving
+//         to the first camera.  The last version that seemed to be reliable in this sense was 0.16.
+
+var cameras = [
+    { name: "Amalthea", from: "Io" },
+    { name: "Io",       from: "Europa" },
+    { name: "Europa",   from: "Ganymede" },
+    { name: "Ganymede", from: "Callisto" }
+];
+
+core.wait(5);
+
+// Set various display attributes
+core.            setRealTime();
+core.            setGuiVisible(false);
+core.            setMaxFps(5);
+SolarSystem.     setFlagLabels(true);
+SolarSystem.     setLabelsAmount(1);
+StarMgr.         setLabelsAmount(0);
+StelMovementMgr. setEquatorialMount(true);
+GridLinesMgr.    setFlagEclipticLine(true);
+GridLinesMgr.    setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
+//ConstellationMgr.setLinesColor (Vec3f(0.1, 0.2, 0.3));
+//ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
+//ConstellationMgr.setFlagLines(true);
+//ConstellationMgr.setFlagLabels(true);
+
+var wait = 60;   // Number of seconds to wait between camera changes
+var round = 1;   // Keep track of the round, and display labels every 5 rounds
+var i = 0;
+
+while(true) {
+  var camera = cameras[i];
+
+  core.setObserverLocation(0, 0, 100, 0, "", camera.from);
+  
+  // Newer versions of Stellarium keep different landscape states for each planet/moon so we have to hide it for each
+  hideLandscape();
+
+  core.selectObjectByName(camera.name, false);
+  StelMovementMgr.setFlagTracking(true);
+  StelMovementMgr.zoomTo(40, 0);
+  core.wait(3 * wait);
+
+  if (++i == cameras.length) {
+    round++;
+    i = 0;
+
+    // Show planet/moon labels every few rounds
+    SolarSystem.setFlagLabels(round % 5 == 1);
+  }
+}
+
+function hideLandscape() {
+  LandscapeMgr.setFlagAtmosphere(false);
+  LandscapeMgr.setFlagLandscape(false);
+  LandscapeMgr.setFlagFog(false);
+  LandscapeMgr.setFlagCardinalsPoints(false);
+}

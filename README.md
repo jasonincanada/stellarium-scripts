@@ -4,6 +4,7 @@ Scripts for [Stellarium](http://stellarium.org/), the open-source planetarium pr
 Script | Description
 --- | ---
 *[polaris](./polaris.ssc)* | Main tour of the solar system up to Saturn. Perfect for studying the orbits of the planets and moons in real-time.
+*[galilean-moons](./galilean-moons.ssc)* | Cycle through the four Galilean moons. Great for studying the [Laplace resonance](https://en.wikipedia.org/wiki/Orbital_resonance#Laplace_resonance) of Io/Europa/Ganymede in real-time.
 *[fly-to-mars](./fly-to-mars.ssc)* | Fly from Earth to Mars in 20 seconds, keeping the camera pointed toward the Sun
 *[moon-from-mars](./moon-from-mars.ssc)* | Earth's moon from Mars
 *[constellations](./constellations.ssc)* | Constellations view
