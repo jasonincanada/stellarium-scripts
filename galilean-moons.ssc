@@ -43,7 +43,7 @@ var i = 0;
 while(true) {
   var camera = cameras[i];
 
-  core.setObserverLocation(0, 0, 100, 0, "", camera.from);
+  core.setObserverLocation(0, 80, 100, 0, "", camera.from);
   
   // Newer versions of Stellarium keep different landscape states for each planet/moon so we have to hide it for each
   hideLandscape();
