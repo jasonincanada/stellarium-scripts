@@ -4,14 +4,14 @@
 // About:  A slow tour around the solar system up to Saturn. Cameras on moons point to an inner moon.
 
 var cameras = [
-    { name: "Sun",     from: "Earth",  fov: 40   , wait: 2 },
+    { name: "Sun",     from: "Earth",  fov: 40   , wait: 2, constellations: true },
     { name: "Moon",    from: "Earth",  fov: 1    , wait: 1, z: 1, spinWait: 2 },
     { name: "Mars",    from: "Earth",  fov:   .01, wait: 3 },
     { name: "Phobos",  from: "Deimos", fov: 40   , wait: 5 },
     { name: "Jupiter", from: "Earth",  fov:   .1 , wait: 3 },
     { name: "Io",      from: "Europa", fov: 40   , wait: 5 },
     { name: "Saturn",  from: "Earth",  fov:   .05, wait: 3 },
-    { name: "Mimas",   from: "Rhea",   fov: 40   , wait: 5 },
+    { name: "Mimas",   from: "Rhea",   fov: 40   , wait: 5, constellations: true },
 ];
 
 // Set various display attributes
@@ -26,8 +26,6 @@ GridLinesMgr.    setFlagEclipticLine(true);
 GridLinesMgr.    setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
 ConstellationMgr.setLinesColor (Vec3f(0.1, 0.2, 0.3));
 ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
-//ConstellationMgr.setFlagLines(true);
-//ConstellationMgr.setFlagLabels(true);
 ConstellationMgr.setFlagBoundaries(false);
 
 var wait = 60;   // Number of seconds to wait between camera changes, multiplied by camera.wait
@@ -37,6 +35,8 @@ var i = 0;
 
 while(true) {
   var camera = cameras[i];
+
+  ConstellationMgr.setFlagLines(camera.constellations);
 
   // Toronto latitude/longitude
   core.setObserverLocation(43.65, 79.38, 100, 0, "", camera.from);
