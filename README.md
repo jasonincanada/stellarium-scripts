@@ -1,6 +1,8 @@
 ## Stellarium Scripts
 Scripts for [Stellarium](http://stellarium.org/), the open-source planetarium program.  To run a script, double-click it from your desktop.
 
+**Note:** If a script appears to do nothing when double-clicking it from your desktop (sometimes it just points the telescope to the ground and you're staring at the grass), load Stellarium first and then hit F12 to load the Script console. Click the left-most folder icon to find the script, then click the Play button on the right to run it.
+
 Script | Description
 --- | ---
 *[polaris](./polaris.ssc)* | Main tour of the solar system up to Saturn. Perfect for studying the orbits of the planets and moons in real-time.
