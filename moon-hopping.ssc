@@ -19,7 +19,7 @@ var cameras = [
 // Set various display attributes
 core.            setRealTime();
 core.            setGuiVisible(false);
-core.            setMaxFps(10);
+core.            setMinFps(1);
 SolarSystem.     setFlagLabels(true);
 SolarSystem.     setLabelsAmount(1);
 StarMgr.         setLabelsAmount(0);
@@ -52,7 +52,12 @@ while(true) {
 
   StelMovementMgr.zoomTo(camera.fov, camera.z || zoomSec);
   core.wait(camera.z || zoomSec);
+
+  core.wait(2);
+  core.setMinFps(1);
   core.wait(camera.wait * wait);
+  core.setMinFps(25);
+  core.wait(2);
 
   if (++i == cameras.length) {
     round++;
