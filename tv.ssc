@@ -117,7 +117,7 @@ function updateInterface() {
   var hour = now.getHours();
   
   // Show planet/moon labels every third hour
-  SolarSystem.setFlagLabels(hour % 3 == 1);
+  SolarSystem.setFlagLabels(hour % 3 == 0);
 }
 
 function hideLandscape() {
