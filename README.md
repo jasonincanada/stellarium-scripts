@@ -5,6 +5,7 @@ Scripts for [Stellarium](http://stellarium.org/), the open-source planetarium pr
 
 Script | Description
 --- | ---
+*[tv](./tv.ssc)* | If the solar system had a TV channel, this is what would be playing on an hourly loop
 *[polaris](./polaris.ssc)* | Main tour of the solar system up to Saturn. Perfect for studying the orbits of the planets and moons in real-time.
 *[moon-hopping](./moon-hopping.ssc)* | Moon hopping, up to Saturn. See the planets up close from their innermost moons, working outwards.
 *[galilean-moons](./galilean-moons.ssc)* | Cycle through the four Galilean moons. Great for studying the [Laplace resonance](https://en.wikipedia.org/wiki/Orbital_resonance#Laplace_resonance) of Io/Europa/Ganymede in real-time.
