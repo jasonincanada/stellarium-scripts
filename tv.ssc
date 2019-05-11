@@ -93,12 +93,19 @@ function toCamera(camera) {
   core.setMinFps(25);
   core.wait(2);
 
-  // Toronto latitude/longitude
-  core.setObserverLocation(43.65, 79.38, 100, 0, "", camera.from);
+  ConstellationMgr.setFlagLines(camera.constellations);
+
+  core.setObserverLocation(45, 80, 100, 0, "", camera.from);
+  StelMovementMgr.setEquatorialMount(true);
 
   hideLandscape();
 
   core.selectObjectByName(camera.name, false);
+
+  if (camera.name === "Sun" && camera.from === "Earth") {
+    maybeShowSunset();
+  }
+
   StelMovementMgr.setFlagTracking(true);
   core.wait(camera.spinWait || 0);
 
@@ -106,10 +113,24 @@ function toCamera(camera) {
   core.wait(camera.z || zoomSec);
 
   SolarSystem.setFlagOrbits(camera.orbits);
-  ConstellationMgr.setFlagLines(camera.constellations);
   
   core.wait(2);
   core.setMinFps(1);
+}
+
+function maybeShowSunset() {
+
+  // If the Sun is setting or rising
+  var sunAltitude = core.getObjectInfo("Sun").altitude;
+
+  if (sunAltitude >= 0 && sunAltitude < 15) {
+    core.setObserverLocation(-79.38, 43.65, 100, 0, "", "Earth");
+    LandscapeMgr.setCurrentLandscapeID("Garching");
+    LandscapeMgr.setFlagAtmosphere(true);
+    LandscapeMgr.setFlagLandscape(true);
+    StelMovementMgr.setEquatorialMount(false);
+    ConstellationMgr.setFlagLines(false);
+  }
 }
 
 function updateInterface() {
