@@ -119,12 +119,14 @@ function toCamera(camera) {
 }
 
 function maybeShowSunset() {
+  // Toronto
+  core.setObserverLocation(-79.38, 43.65, 100, 0, "", "Earth");
+  core.wait(.5);
 
   // If the Sun is setting or rising
   var sunAltitude = core.getObjectInfo("Sun").altitude;
 
   if (sunAltitude >= 0 && sunAltitude < 15) {
-    core.setObserverLocation(-79.38, 43.65, 100, 0, "", "Earth");
     LandscapeMgr.setCurrentLandscapeID("Garching");
     LandscapeMgr.setFlagAtmosphere(true);
     LandscapeMgr.setFlagLandscape(true);
