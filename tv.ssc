@@ -6,10 +6,10 @@
 var cameras = [
 
     // From Mars, keeping an eye on the inner solar system. This is the "default" camera showing for
-	// the first half of the hour, followed by a tour of the moons/planets up to Saturn in the second
+    // the first half of the hour, followed by a tour of the moons/planets up to Saturn in the second
     { name: "Sun",      from: "Mars",     fov: 40   , wait: 30, constellations: true, orbits: true },
 
-	// The Sun and moon from Earth
+    // The Sun and moon from Earth
     { name: "Sun",      from: "Earth",    fov: 40   , wait: 2 , constellations: true },
     { name: "Moon",     from: "Earth",    fov: 1    , wait: 1 , z: 1, spinWait: 2 },
     { name: "Earth",    from: "Moon",     fov: 40   , wait: 1 },
@@ -59,12 +59,12 @@ var lastCamera = undefined;
 
 while(true) {
   var camera = getCameraForThisMinute();
-  
+
   if (camera !== lastCamera) {
-	lastCamera = camera;
+    lastCamera = camera;
 
     toCamera(camera);
-	updateInterface();
+    updateInterface();
   }
   
   // Check for camera change every 1 second
@@ -78,10 +78,10 @@ function getCameraForThisMinute() {
   
   for (var i=0, wait=0; i < cameras.length; i++) {
     wait += cameras[i].wait;
-	
-	if (wait >= minute) {
-	  return cameras[i];
-	}
+  
+    if (wait >= minute) {
+      return cameras[i];
+    }
   }
   
   return cameras[0];
