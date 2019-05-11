@@ -1,7 +1,7 @@
 // Name:   Television - All solar system all the time
 // Author: Jason Hooper
 // Date:   11 May 2019
-// About:  If the solar system had a TV channel, this is what would be playing on an hourly loop
+// About:  If the solar system had a TV channel, this would be playing on an hourly loop
 
 var cameras = [
 
