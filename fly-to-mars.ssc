@@ -4,6 +4,7 @@
 // About:  Fly from Earth to Mars in 20 seconds, keeping the camera on the Sun
 
 core.           setRealTime();
+core.           setMinFps(25);
 core.           setGuiVisible(false);
 SolarSystem.    setFlagLabels(true);
 StarMgr.        setLabelsAmount(0);
@@ -22,6 +23,10 @@ StelMovementMgr.setFlagTracking(true);
 core.wait(2);
 core.setObserverLocation(0, 0, 100, 20, "", "Mars");
 hideLandscape();
+
+core.wait(25);
+core.           setMinFps(1);
+
 
 function hideLandscape() {
   LandscapeMgr.setFlagAtmosphere(false);
