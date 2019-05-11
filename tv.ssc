@@ -75,11 +75,11 @@ while(true) {
 function getCameraForThisMinute() {
   var now = new Date();
   var minute = now.getMinutes();
-  
+
   for (var i=0, wait=0; i < cameras.length; i++) {
     wait += cameras[i].wait;
-  
-    if (wait >= minute) {
+
+    if (minute < wait) {
       return cameras[i];
     }
   }
