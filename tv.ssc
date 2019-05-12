@@ -46,7 +46,7 @@ StelMovementMgr. setEquatorialMount(true);
 GridLinesMgr.    setFlagEclipticLine(true);
 GridLinesMgr.    setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
 GridLinesMgr.    setFlagEquatorGrid(false);
-ConstellationMgr.setLinesColor (Vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setLinesColor (Vec3f(0.1, 0.1, 0.1));
 ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
 ConstellationMgr.setFlagBoundaries(false);
 
