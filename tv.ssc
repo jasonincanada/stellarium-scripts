@@ -3,6 +3,10 @@
 // Date:   11 May 2019
 // About:  If the solar system had a TV channel, this would be playing on an hourly loop
 
+// Toronto
+var myLongitude = -79.4;
+var myLatitude  =  43.6;
+
 var cameras = [
 
     // From Mars, keeping an eye on the inner solar system. This is the "default" camera showing for
@@ -119,8 +123,7 @@ function toCamera(camera) {
 }
 
 function maybeShowSunset() {
-  // Toronto
-  core.setObserverLocation(-79.38, 43.65, 100, 0, "", "Earth");
+  core.setObserverLocation(myLongitude, myLatitude, 100, 0, "", "Earth");
   core.wait(.5);
 
   // If the Sun is setting or rising
