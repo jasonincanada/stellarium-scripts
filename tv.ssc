@@ -44,6 +44,8 @@ SolarSystem.     setOrbitsColor(Vec3f(.4, .2, .2));
 SolarSystem.     setMercuryOrbitColor(Vec3f(.4, .4, .4));
 SolarSystem.     setVenusOrbitColor(Vec3f(.6, .6, .4));
 SolarSystem.     setEarthOrbitColor(Vec3f(.2, .4, .6));
+SolarSystem.     setUranusOrbitColor(Vec3f(.1, .1, .1));
+SolarSystem.     setNeptuneOrbitColor(Vec3f(.1, .1, .1));
 SolarSystem.     setLabelsAmount(1);
 StarMgr.         setLabelsAmount(0);
 StelMovementMgr. setEquatorialMount(true);
