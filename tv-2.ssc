@@ -1,0 +1,159 @@
+// Name:   Television 2 - All solar system all the time
+// Author: Jason Hooper
+// Date:   4 Oct 2019 (original channel: 11 May 2019)
+//
+// About:  Channel 2 - This one divides the first half of the hour roughly in half,
+//         16 minutes from Mars to the Sun watching the inner Solar System, then 16
+//         minutes from Earth, with the orbits still showing. Sunset views from Earth,
+//         during appropriate times, are much longer.
+
+// Toronto
+var myLongitude = -79.4;
+var myLatitude  =  43.6;
+
+var cameras = [
+
+    // From Mars, keeping an eye on the inner solar system
+    { name: "Sun",      from: "Mars",     fov: 40   , wait: 16, constellations: true, orbits: true },
+
+    // The Sun and moon from Earth
+    { name: "Sun",      from: "Earth",    fov: 40   , wait: 16, constellations: true, orbits: true },
+    { name: "Moon",     from: "Earth",    fov: 1    , wait: 1 , z: 1, spinWait: 2 },
+    { name: "Earth",    from: "Moon",     fov: 40   , wait: 1 },
+
+    // Mars
+    { name: "Mars",     from: "Phobos",   fov: 40   , wait: 2 },
+    { name: "Phobos",   from: "Deimos",   fov: 40   , wait: 3 },
+
+    // Jupiter
+    { name: "Jupiter",  from: "Io",       fov: 40   , wait: 2 },
+    { name: "Io",       from: "Europa",   fov: 40   , wait: 3 },
+    { name: "Europa",   from: "Ganymede", fov: 40   , wait: 3 },
+    { name: "Ganymede", from: "Callisto", fov: 40   , wait: 3 },
+
+    // Saturn
+    { name: "Saturn",   from: "Mimas",    fov: 40   , wait: 2 },
+    { name: "Mimas",    from: "Rhea",     fov: 40   , wait: 8, constellations: true }
+];
+
+// Set various display attributes
+core.            setRealTime();
+core.            setGuiVisible(false);
+core.            setMinFps(1);
+SolarSystem.     setFlagLabels(true);
+SolarSystem.     setLabelsAmount(1);
+SolarSystem.     setOrbitColorStyle("major_planets");
+SolarSystem.     setOrbitsColor(Vec3f(.4, .2, .2));
+SolarSystem.     setMercuryOrbitColor(Vec3f(.4, .4, .4));
+SolarSystem.     setVenusOrbitColor(Vec3f(.6, .6, .4));
+SolarSystem.     setEarthOrbitColor(Vec3f(.2, .4, .6));
+SolarSystem.     setUranusOrbitColor(Vec3f(.1, .1, .1));
+SolarSystem.     setNeptuneOrbitColor(Vec3f(.1, .1, .1));
+SolarSystem.     setLabelsAmount(1);
+StarMgr.         setLabelsAmount(0);
+StelMovementMgr. setEquatorialMount(true);
+GridLinesMgr.    setFlagEclipticLine(true);
+GridLinesMgr.    setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
+GridLinesMgr.    setFlagEquatorGrid(false);
+ConstellationMgr.setLinesColor (Vec3f(0.2, 0.2, 0.2));
+ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setFlagBoundaries(false);
+
+var wait = 60;   // Number of seconds to wait between camera changes, multiplied by camera.wait
+var zoomSec = 0; // Duration of zooms (0 for instant)
+var round = 1;
+var i = 0;
+
+var lastCamera = undefined;
+
+while(true) {
+  var camera = getCameraForThisMinute();
+
+  if (camera !== lastCamera) {
+    lastCamera = camera;
+
+    toCamera(camera);
+    updateInterface();
+  }
+  
+  // Check for camera change every 1 second
+  core.wait(1);
+}
+
+// Determine which camera should be showing at this time of hour
+function getCameraForThisMinute() {
+  var now = new Date();
+  var minute = now.getMinutes();
+
+  for (var i=0, wait=0; i < cameras.length; i++) {
+    wait += cameras[i].wait;
+
+    if (minute < wait) {
+      return cameras[i];
+    }
+  }
+  
+  return cameras[0];
+}
+
+function toCamera(camera) {
+
+  // Spin up the framerate for smooth transitions
+  core.setMinFps(25);
+  core.wait(2);
+
+  ConstellationMgr.setFlagLines(camera.constellations);
+
+  core.setObserverLocation(45, 80, 100, 0, "", camera.from);
+  StelMovementMgr.setEquatorialMount(true);
+
+  hideLandscape();
+
+  core.selectObjectByName(camera.name, false);
+
+  if (camera.name === "Sun" && camera.from === "Earth") {
+    maybeShowSunset();
+  }
+
+  StelMovementMgr.setFlagTracking(true);
+  core.wait(camera.spinWait || 0);
+
+  StelMovementMgr.zoomTo(camera.fov, camera.z || zoomSec);
+  core.wait(camera.z || zoomSec);
+
+  SolarSystem.setFlagOrbits(camera.orbits);
+  
+  core.wait(2);
+  core.setMinFps(1);
+}
+
+function maybeShowSunset() {
+  core.setObserverLocation(myLongitude, myLatitude, 100, 0, "", "Earth");
+  core.wait(.5);
+
+  // If the Sun is setting or rising
+  var sunAltitude = core.getObjectInfo("Sun").altitude;
+
+  if (sunAltitude >= 0 && sunAltitude < 15) {
+    LandscapeMgr.setCurrentLandscapeID("Garching");
+    LandscapeMgr.setFlagAtmosphere(true);
+    LandscapeMgr.setFlagLandscape(true);
+    StelMovementMgr.setEquatorialMount(false);
+    ConstellationMgr.setFlagLines(false);
+  }
+}
+
+function updateInterface() {
+  var now = new Date();
+  var hour = now.getHours();
+  
+  // Show planet/moon labels every third hour
+  SolarSystem.setFlagLabels(hour % 3 == 0);
+}
+
+function hideLandscape() {
+  LandscapeMgr.setFlagAtmosphere(false);
+  LandscapeMgr.setFlagLandscape(false);
+  LandscapeMgr.setFlagFog(false);
+  LandscapeMgr.setFlagCardinalsPoints(false);
+}
