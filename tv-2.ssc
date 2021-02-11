@@ -40,6 +40,7 @@ var cameras = [
 core.            setRealTime();
 core.            setGuiVisible(false);
 core.            setMinFps(1);
+core.            setProjectionMode("ProjectionPerspective");
 SolarSystem.     setFlagLabels(true);
 SolarSystem.     setLabelsAmount(1);
 SolarSystem.     setOrbitColorStyle("major_planets");
