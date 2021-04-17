@@ -40,7 +40,6 @@ var cameras = [
 core.            setRealTime();
 core.            setGuiVisible(false);
 core.            setMinFps(1);
-core.            setProjectionMode("ProjectionPerspective");
 SolarSystem.     setFlagLabels(true);
 SolarSystem.     setLabelsAmount(1);
 SolarSystem.     setOrbitColorStyle("major_planets");
@@ -114,6 +113,8 @@ function toCamera(camera) {
 
   if (camera.name === "Sun" && camera.from === "Earth") {
     maybeShowSunset();
+  } else {
+    core.setProjectionMode("ProjectionStereographic");
   }
 
   StelMovementMgr.setFlagTracking(true);
@@ -136,6 +137,8 @@ function maybeShowSunset() {
   var sunAltitude = core.getObjectInfo("Sun").altitude;
 
   if (sunAltitude >= 0 && sunAltitude < 15) {
+    core.setProjectionMode("ProjectionPerspective");
+
     LandscapeMgr.setCurrentLandscapeID("Garching");
     LandscapeMgr.setFlagAtmosphere(true);
     LandscapeMgr.setFlagLandscape(true);
