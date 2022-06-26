@@ -152,5 +152,5 @@ function hideLandscape() {
   LandscapeMgr.setFlagAtmosphere(false);
   LandscapeMgr.setFlagLandscape(false);
   LandscapeMgr.setFlagFog(false);
-  LandscapeMgr.setFlagCardinalsPoints(false);
+  LandscapeMgr.setFlagCardinalPoints(false);
 }

@@ -12,7 +12,7 @@ StelMovementMgr.setEquatorialMount(true);
 core.setObserverLocation(0, 0, 100, 0, "", "Naiad");
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagLandscape(false);
-LandscapeMgr.setFlagCardinalsPoints(false);
+LandscapeMgr.setFlagCardinalPoints(false);
 core.selectObjectByName("Neptune", false);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(40, 3);

@@ -31,5 +31,5 @@ core.           setMinFps(1);
 function hideLandscape() {
   LandscapeMgr.setFlagAtmosphere(false);
   LandscapeMgr.setFlagLandscape(false);
-  LandscapeMgr.setFlagCardinalsPoints(false);
+  LandscapeMgr.setFlagCardinalPoints(false);
 }
