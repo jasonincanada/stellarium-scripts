@@ -7,13 +7,13 @@ core.            setRealTime();
 SolarSystem.     setFlagLabels(true);
 StarMgr.         setLabelsAmount(0);
 StelMovementMgr .setEquatorialMount(true);
-ConstellationMgr.setLinesColor (Vec3f(0.1, 0.2, 0.3));
-ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setLinesColor (core.vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setLabelsColor(core.vec3f(0.1, 0.2, 0.3));
 ConstellationMgr.setFlagLines  (true);
 ConstellationMgr.setFlagLabels (true);
 ConstellationMgr.setFlagBoundaries(true);
 GridLinesMgr    .setFlagEclipticLine(true)
-GridLinesMgr    .setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
+GridLinesMgr    .setColorEclipticLine(core.vec3f(0.3, 0.2, 0.2));
 
 core.setObserverLocation(0, 0, 100, 0, "", "Earth");
 LandscapeMgr.setFlagAtmosphere(false);

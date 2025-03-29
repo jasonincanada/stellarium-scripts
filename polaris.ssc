@@ -23,9 +23,9 @@ SolarSystem.     setLabelsAmount(1);
 StarMgr.         setLabelsAmount(0);
 StelMovementMgr. setEquatorialMount(true);
 GridLinesMgr.    setFlagEclipticLine(true);
-GridLinesMgr.    setColorEclipticLine(Vec3f(0.3, 0.2, 0.2));
-ConstellationMgr.setLinesColor (Vec3f(0.1, 0.2, 0.3));
-ConstellationMgr.setLabelsColor(Vec3f(0.1, 0.2, 0.3));
+GridLinesMgr.    setColorEclipticLine(core.vec3f(0.3, 0.2, 0.2));
+ConstellationMgr.setLinesColor (core.vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setLabelsColor(core.vec3f(0.1, 0.2, 0.3));
 ConstellationMgr.setFlagBoundaries(false);
 
 var wait = 60;   // Number of seconds to wait between camera changes, multiplied by camera.wait
