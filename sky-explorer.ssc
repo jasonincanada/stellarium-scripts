@@ -1,0 +1,61 @@
+// Name:   Sky Explorer
+// Date:   18 May 2025
+// About:  My main Stellarium settings. It shows the ecliptic (yellow), local horizon (green), and equatorial grid (blue).
+//         Every month the script points in a new direction, roughly tracking the Sun moving along the ecliptic.
+
+core.setRealTime();
+core.setGuiVisible(false);
+
+// Hide atmosphere and ground
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagLandscape(false);
+core.wait(1);
+
+// Show a yellowish ecliptic
+GridLinesMgr.setFlagEclipticLine(true);
+GridLinesMgr.setColorEclipticLine(core.vec3f(0.6, 0.6, 0.2));
+
+// Show a greenish horizon Line with degree markings
+GridLinesMgr.setFlagHorizonLine(true);
+GridLinesMgr.setFlagHorizonParts(true);
+GridLinesMgr.setFlagHorizonLabeled(true);
+GridLinesMgr.setColorHorizonLine(core.vec3f(0.2, 0.5, 0.4));
+
+// Show a dark blue equatorial grid
+GridLinesMgr.setFlagEquatorGrid(true);
+GridLinesMgr.setColorEquatorGrid(core.vec3f(0.1, 0.2, 0.3));
+// Ctrl-M in Stellarium to toggle equatorial mount
+//StelMovementMgr.setEquatorialMount(true);
+
+// Show light blue constellations
+ConstellationMgr.setLinesColor(core.vec3f(0.2, 0.3, 0.4));
+ConstellationMgr.setLabelsColor(core.vec3f(0.1, 0.2, 0.3));
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagLabels(true);
+
+// Point camera based on the current month, then zoom out a bit
+core.wait(1);
+core.selectObjectByName(getObjectToFocus(), false);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(70, 5);
+
+
+// Which object to focus on based on the current month. I picked these fairly quickly, so they'll likely change over the next year
+function getObjectToFocus() {
+    var month = new Date().getUTCMonth();
+
+    return [
+        'Dabih',        // January
+        'Sadalmelik',   // February
+        'Sadalmelik',   // March
+        'Menkar',       // April
+        'Menkar',       // May
+        'Betelgeuse',   // June
+        'Pollux',       // July
+        'Regulus',      // August
+        'Spica',        // September
+        'Spica',        // October
+        'Antares',      // November
+        'Sgr A*'        // December
+    ][month]
+}
