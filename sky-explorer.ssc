@@ -15,6 +15,12 @@ core.wait(1);
 GridLinesMgr.setFlagEclipticLine(true);
 GridLinesMgr.setColorEclipticLine(core.vec3f(0.6, 0.6, 0.2));
 
+// Show a light blue equator line (0° declination)
+GridLinesMgr.setFlagEquatorLine(true);
+GridLinesMgr.setFlagEquatorParts(true);
+GridLinesMgr.setFlagEquatorLabeled(true);
+GridLinesMgr.setColorEquatorLine(core.vec3f(0.2, 0.4, 0.6));
+
 // Show a greenish horizon Line with degree markings
 GridLinesMgr.setFlagHorizonLine(true);
 GridLinesMgr.setFlagHorizonParts(true);
@@ -38,6 +44,8 @@ core.wait(1);
 core.selectObjectByName(getObjectToFocus(), false);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(70, 5);
+core.wait(5);
+core.setMinFps(2);
 
 
 // Which object to focus on based on the current month. I picked these fairly quickly, so they'll likely change over the next year
